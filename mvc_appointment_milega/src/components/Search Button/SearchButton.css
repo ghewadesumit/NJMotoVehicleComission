@@ -1,0 +1,28 @@
+.search-btn-container {
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-btn {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+}
+
+.start-search-btn {
+  background-color: green;
+}
+
+.stop-search-btn {
+  background-color: crimson;
+}
+
+.disabled-search-btn {
+  background-color: #aaa;
+  cursor: none;
+}

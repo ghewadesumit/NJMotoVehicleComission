@@ -1,0 +1,13 @@
+.selected-location-container {
+  margin: 0.4rem;
+}
+
+.selected-location-wrapper {
+  display: flex;
+}
+
+.selected-location {
+  padding: 0.1rem 0.4rem;
+  background-color: #aaa;
+  margin-left: 0.4rem;
+}

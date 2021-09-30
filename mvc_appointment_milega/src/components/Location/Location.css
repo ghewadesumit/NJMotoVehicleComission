@@ -1,0 +1,57 @@
+.location-container {
+  width: 100vw;
+  flex: 2;
+  display: flex;
+  border: 1px solid blue;
+  flex-wrap: wrap;
+  overflow: auto;
+  flex-direction: row;
+}
+
+.location-wrapper {
+  width: 10rem;
+  height: 10rem;
+  border: 1px solid orange;
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem;
+}
+
+.location-name {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-holder {
+  width: 100%;
+  height: 2rem;
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid red;
+}
+
+.select-location-btn {
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.2rem 0.2rem;
+
+  color: white;
+}
+
+.Deselect {
+  background-color: crimson;
+}
+
+.Select {
+  background-color: cornflowerblue;
+}
+
+.found {
+  cursor: pointer;
+  background-color: green;
+}
