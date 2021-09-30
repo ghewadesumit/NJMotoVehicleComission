@@ -1,136 +1,126 @@
 import './App.css';
 import DropDown from './components/DropDown/DropDown';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import React from 'react';
 import Location from './components/Location/Location';
 import * as locationData from './utils/data';
 import SelectedLocation from './components/Selected Location/SelectedLocation';
 import SearchButton from './components/Search Button/SearchButton';
 
-import useStateWithCallback from 'use-state-with-callback';
-
-function App() {
-  const [appointmentType, setAppointmentType] = useState(null);
-  const [appointmentLocation, setAppointmentLocation] = useState(null);
-  const [selectedLocation, setSelectedLocation] = useState([]);
-  // const [isSearching, setIsSearching] = useStateWithCallback(false);
-  const [isSearching, setIsSearching] = useState(false);
-  const [serverResponse, setServerResponse] = useState([]);
-  // const [urlArray, setUrlArray] = useState([]);
-  let setIntervalCallingServer = undefined;
-
-  const locationTempData = locationData.locationName.map((item) => {
-    return { name: item.name, index: item.index, isSelected: false };
-  });
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      appointmentType: null,
+      apppintmentLocation: null,
+      selectedLocation: [],
+      isSearching: false,
+      serverResponse: [],
+    };
+    this.setIntervalCallingServer = undefined;
+    this.locationTempData = locationData.locationName.map((item) => {
+      return { name: item.name, index: item.index, isSelected: false };
+    });
+  }
 
   /** Setting appointment type after selection in DropDown  */
-  const handleAppointmentType = (appointment) => {
-    setAppointmentType(appointment);
+  handleAppointmentType = (appointment) => {
+    this.setState({ appointmentType: appointment });
   };
 
   /** handleIsSelected is triggered from location item */
-  const handleIsSelected = (locationItem) => {
+  handleIsSelected = (locationItem) => {
     locationItem.isSelected = !locationItem.isSelected;
-    addLocation(locationItem);
+    this.addLocation(locationItem);
 
-    const filteredAppointmentLocation = appointmentLocation.filter(
+    const filteredAppointmentLocation = this.state.appointmentLocation.filter(
       (item) => item.index !== locationItem.index
     );
-    setAppointmentLocation(
-      [...filteredAppointmentLocation, locationItem].sort(
+    this.setState({
+      AppointmentLocation: [...filteredAppointmentLocation, locationItem].sort(
         (a, b) => a.index - b.index
-      )
-    );
+      ),
+    });
   };
 
-  /** AddLocation is triggered from handleIsSelected (Above function)
-   */
-  const addLocation = (location) => {
+  /** AddLocation is triggered from handleIsSelected (Above function)*/
+  addLocation = (location) => {
     if (location.isSelected) {
-      selectedLocation.push(location.name);
-      setSelectedLocation(selectedLocation);
+      this.setState({
+        selectedLocation: [...this.state.selectedLocation, location.name],
+      });
     } else {
-      const tempLocation = selectedLocation.filter(
+      const tempLocation = this.state.selectedLocation.filter(
         (item) => item !== location.name
       );
-      setSelectedLocation([...tempLocation]);
+      this.setState({ selectedLocation: [...tempLocation] });
     }
   };
 
   /** Triggered from Search button component */
-  // const handleIsSearching = () => {
-  //   setIsSearching(!isSearching, (searchState) => {
-  //     if (searchState) {
-  //       console.log('Search Button is True');
-  //       setIntervalCallingServer = setInterval(callingServer, 30 * 1000);
-  //     } else if (!searchState) {
-  //       console.log('Search button is false');
-  //       clearInterval(setIntervalCallingServer);
-  //     }
-  //   });
-  // };
-  const handleIsSearching = () => {
-    setIsSearching(!isSearching);
+  handleIsSearching = () => {
+    this.setState({ isSearching: !this.state.isSearching }, () => {
+      if (this.state.isSearching) {
+        this.setIntervalCallingServer = setInterval(this.callMVCSearch, 3000);
+      } else if (!this.state.isSearching) {
+        clearInterval(this.callMVCSearch);
+      }
+    });
   };
 
   /** Calling the algorithm for searching the appointment */
-  const callMVCSearch = async (appointmentData) => {
+  callMVCSearch = async (appointmentData) => {
     const response = await axios.post('/api/mvc_search', appointmentData);
     if (response.status == 200 && response.statusText == 'OK') {
       return response.data;
     }
   };
 
-  const callingServer = () => {
+  callingServer = () => {
     const appointmentData = {
-      appointmentType: appointmentType,
-      selectedLocation: selectedLocation,
+      appointmentType: this.state.appointmentType,
+      selectedLocation: this.state.selectedLocation,
       requiredMonths: locationData.currentThreeMonths(),
     };
     console.log('Sending data', appointmentData);
 
-    callMVCSearch(appointmentData)
-      .then((response) => setServerResponse(response.data))
+    this.callMVCSearch(appointmentData)
+      .then((response) => this.setState({ serverResponse: response.data }))
       .catch((err) => console.log('error is', err));
   };
 
-  useEffect(() => {
-    if (appointmentLocation == null) {
-      setAppointmentLocation(locationTempData);
+  componentDidMount() {
+    if (this.state.appointmentLocation == null) {
+      this.setState({ appointmentLocation: this.locationTempData });
     }
 
-    if (isSearching) {
-      console.log('isSearching is true');
-      setIntervalCallingServer = setInterval(callingServer, 6000);
-    } else if (!isSearching) {
-      console.log('isSearching is false');
-      clearInterval(setIntervalCallingServer);
-    }
-    console.log('location selected are', selectedLocation);
-  }, [
-    appointmentType,
-    appointmentLocation,
-    locationTempData,
-    selectedLocation,
-    isSearching,
-  ]);
+    console.log('location selected are', this.state.selectedLocation);
+  }
 
-  return (
-    <div className='main-container'>
-      <DropDown handleAppointmentType={handleAppointmentType} />
-      <SelectedLocation selectedLocation={selectedLocation} />
-      <Location
-        locationData={appointmentLocation}
-        handleIsSelected={handleIsSelected}
-        serverResponse={serverResponse}
-      />
-      <SearchButton
-        selectedLocation={selectedLocation}
-        isSearching={isSearching}
-        handleIsSearching={handleIsSearching}
-      />
-    </div>
-  );
+  render() {
+    const {
+      appointmentLocation,
+      selectedLocation,
+      isSearching,
+      serverResponse,
+    } = this.state;
+    return (
+      <div className='main-container'>
+        <DropDown handleAppointmentType={this.handleAppointmentType} />
+        <SelectedLocation selectedLocation={selectedLocation} />
+        <Location
+          locationData={appointmentLocation}
+          handleIsSelected={this.handleIsSelected}
+          serverResponse={serverResponse}
+        />
+        <SearchButton
+          selectedLocation={selectedLocation}
+          isSearching={isSearching}
+          handleIsSearching={this.handleIsSearching}
+        />
+      </div>
+    );
+  }
 }
 
 export default App;
