@@ -26,12 +26,12 @@ export const currentThreeMonths = () => {
   let requiredMonth = [];
 
   while (requiredNumberOfMonth <= 3) {
+    requiredMonth.push(months[currentMonth]);
+    requiredNumberOfMonth++;
     currentMonth += 1;
     if (currentMonth > 11) {
       currentMonth = 0;
     }
-    requiredMonth.push(months[currentMonth]);
-    requiredNumberOfMonth++;
   }
   return requiredMonth;
 };
