@@ -9,7 +9,7 @@ const mvcSearch = require('./mvcAlgo');
 router.post('/', (req, res) => {
   console.log(req.body);
   const { selectedLocation, requiredMonths, appointmentType } = req.body;
-
+  console.log('Request body is', req.body);
   console.log(
     '************************************Server is still running***********************************'
   );
