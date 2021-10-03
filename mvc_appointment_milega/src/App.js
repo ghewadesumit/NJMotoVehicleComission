@@ -16,6 +16,7 @@ class App extends React.Component {
       selectedLocation: [],
       isSearching: false,
       serverResponse: [],
+      appointmentInterval: 3,
     };
     this.setIntervalCallingServer = undefined;
     this.locationTempData = locationData.locationName.map((item) => {
@@ -27,6 +28,10 @@ class App extends React.Component {
   handleAppointmentType = (appointment) => {
     // console.log('The new appointment is', appointment);
     this.setState({ appointmentType: appointment });
+  };
+
+  handleAppointmentInterval = (interval) => {
+    this.setState({ appointmentInterval: interval });
   };
 
   /** handleIsSelected is triggered from location item */
@@ -62,7 +67,10 @@ class App extends React.Component {
   handleIsSearching = () => {
     this.setState({ isSearching: !this.state.isSearching }, () => {
       if (this.state.isSearching) {
-        this.setIntervalCallingServer = setInterval(this.callingServer, 3000);
+        this.setIntervalCallingServer = setInterval(
+          this.callingServer,
+          this.state.appointmentInterval * 1000
+        );
       } else if (!this.state.isSearching) {
         // console.log('Stopppedddd');
         clearInterval(this.setIntervalCallingServer);
@@ -108,7 +116,10 @@ class App extends React.Component {
     } = this.state;
     return (
       <div className='main-container'>
-        <DropDown handleAppointmentType={this.handleAppointmentType} />
+        <DropDown
+          handleAppointmentType={this.handleAppointmentType}
+          handleAppointmentInterval={this.handleAppointmentInterval}
+        />
         <SelectedLocation selectedLocation={selectedLocation} />
         <Location
           locationData={appointmentLocation}
