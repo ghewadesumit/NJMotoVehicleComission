@@ -25,10 +25,8 @@ class App extends React.Component {
 
   /** Setting appointment type after selection in DropDown  */
   handleAppointmentType = (appointment) => {
-    console.log('The new appointment is', appointment);
-    this.setState({ appointmentType: appointment }, () =>
-      console.log('appointment change', this.state)
-    );
+    // console.log('The new appointment is', appointment);
+    this.setState({ appointmentType: appointment });
   };
 
   /** handleIsSelected is triggered from location item */
@@ -49,19 +47,14 @@ class App extends React.Component {
   /** AddLocation is triggered from handleIsSelected (Above function)*/
   addLocation = (location) => {
     if (location.isSelected) {
-      this.setState(
-        {
-          selectedLocation: [...this.state.selectedLocation, location.name],
-        },
-        () => console.log('Selected location is', this.state)
-      );
+      this.setState({
+        selectedLocation: [...this.state.selectedLocation, location.name],
+      });
     } else {
       const tempLocation = this.state.selectedLocation.filter(
         (item) => item !== location.name
       );
-      this.setState({ selectedLocation: [...tempLocation] }, () =>
-        console.log('Selected else part location is', this.state)
-      );
+      this.setState({ selectedLocation: [...tempLocation] });
     }
   };
 
@@ -71,7 +64,7 @@ class App extends React.Component {
       if (this.state.isSearching) {
         this.setIntervalCallingServer = setInterval(this.callingServer, 3000);
       } else if (!this.state.isSearching) {
-        console.log('Stopppedddd');
+        // console.log('Stopppedddd');
         clearInterval(this.setIntervalCallingServer);
       }
     });
@@ -91,7 +84,7 @@ class App extends React.Component {
       selectedLocation: this.state.selectedLocation,
       requiredMonths: locationData.currentThreeMonths(),
     };
-    console.log('Sending data', appointmentData);
+    // console.log('Sending data', appointmentData);
 
     this.callMVCSearch(appointmentData)
       .then((response) => this.setState({ serverResponse: response.data }))
@@ -103,7 +96,7 @@ class App extends React.Component {
       this.setState({ appointmentLocation: this.locationTempData });
     }
 
-    console.log('location selected are', this.state.selectedLocation);
+    // console.log('location selected are', this.state.selectedLocation);
   }
 
   render() {
