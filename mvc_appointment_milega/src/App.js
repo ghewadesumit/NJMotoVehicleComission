@@ -12,7 +12,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       appointmentType: null,
-      apppintmentLocation: null,
+      appointmentLocation: null,
       selectedLocation: [],
       isSearching: false,
       serverResponse: [],
@@ -25,7 +25,10 @@ class App extends React.Component {
 
   /** Setting appointment type after selection in DropDown  */
   handleAppointmentType = (appointment) => {
-    this.setState({ appointmentType: appointment });
+    console.log('The new appointment is', appointment);
+    this.setState({ appointmentType: appointment }, () =>
+      console.log('appointment change', this.state)
+    );
   };
 
   /** handleIsSelected is triggered from location item */
@@ -37,7 +40,7 @@ class App extends React.Component {
       (item) => item.index !== locationItem.index
     );
     this.setState({
-      AppointmentLocation: [...filteredAppointmentLocation, locationItem].sort(
+      appointmentLocation: [...filteredAppointmentLocation, locationItem].sort(
         (a, b) => a.index - b.index
       ),
     });
@@ -46,14 +49,19 @@ class App extends React.Component {
   /** AddLocation is triggered from handleIsSelected (Above function)*/
   addLocation = (location) => {
     if (location.isSelected) {
-      this.setState({
-        selectedLocation: [...this.state.selectedLocation, location.name],
-      });
+      this.setState(
+        {
+          selectedLocation: [...this.state.selectedLocation, location.name],
+        },
+        () => console.log('Selected location is', this.state)
+      );
     } else {
       const tempLocation = this.state.selectedLocation.filter(
         (item) => item !== location.name
       );
-      this.setState({ selectedLocation: [...tempLocation] });
+      this.setState({ selectedLocation: [...tempLocation] }, () =>
+        console.log('Selected else part location is', this.state)
+      );
     }
   };
 
@@ -61,9 +69,10 @@ class App extends React.Component {
   handleIsSearching = () => {
     this.setState({ isSearching: !this.state.isSearching }, () => {
       if (this.state.isSearching) {
-        this.setIntervalCallingServer = setInterval(this.callMVCSearch, 3000);
+        this.setIntervalCallingServer = setInterval(this.callingServer, 3000);
       } else if (!this.state.isSearching) {
-        clearInterval(this.callMVCSearch);
+        console.log('Stopppedddd');
+        clearInterval(this.setIntervalCallingServer);
       }
     });
   };

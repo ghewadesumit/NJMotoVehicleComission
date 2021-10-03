@@ -1,7 +1,7 @@
 const cheerio = require('cheerio');
 const axios = require('axios');
 const open = require('open');
-const mvcData = require('../data/appointmentUrl.data');
+const mvcData = require('../data/appointmentUrl.data.js');
 
 /* Finding the Data for the current appointment selected*/
 
