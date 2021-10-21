@@ -39,21 +39,25 @@ const mvcData = [
         locationName: 'Eatontown',
         locationNumber: '108',
       },
-      {
-        locationName: 'Elizabeth',
-        locationNumber: '261',
-      },
-      {
-        locationName: 'Flemington',
-        locationNumber: '111',
-      },
-      {
-        locationName: 'Freehold',
-        locationNumber: '113',
-      },
+      // {
+      //   locationName: 'Elizabeth',
+      //   locationNumber: '261',
+      // },
+      // {
+      //   locationName: 'Flemington',
+      //   locationNumber: '111',
+      // },
+      // {
+      //   locationName: 'Freehold',
+      //   locationNumber: '113',
+      // },
       {
         locationName: 'Lodi',
         locationNumber: '114',
+      },
+      {
+        locationName: 'Newark',
+        locationNumber: '116',
       },
     ],
   },
@@ -75,43 +79,47 @@ const mvcData = [
       },
       {
         locationName: 'Bakers Basin',
-        locationNumber: '109',
+        locationNumber: '232',
       },
       {
         locationName: 'Bayonne',
-        locationNumber: '109',
+        locationNumber: '233',
       },
       {
         locationName: 'Camden',
-        locationNumber: '109',
+        locationNumber: '235',
       },
       {
         locationName: 'Cardiff',
-        locationNumber: '109',
+        locationNumber: '254',
       },
       {
         locationName: 'Delanco',
-        locationNumber: '109',
+        locationNumber: '237',
       },
       {
         locationName: 'Eatontown',
-        locationNumber: '109',
+        locationNumber: '238',
       },
-      {
-        locationName: 'Elizabeth',
-        locationNumber: '109',
-      },
-      {
-        locationName: 'Flemington',
-        locationNumber: '109',
-      },
-      {
-        locationName: 'Freehold',
-        locationNumber: '109',
-      },
+      // {
+      //   locationName: 'Elizabeth',
+      //   locationNumber: '109',
+      // },
+      // {
+      //   locationName: 'Flemington',
+      //   locationNumber: '241',
+      // },
+      // {
+      //   locationName: 'Freehold',
+      //   locationNumber: '109',
+      // },
       {
         locationName: 'Lodi',
-        locationNumber: '109',
+        locationNumber: '244',
+      },
+      {
+        locationName: 'Newark',
+        locationNumber: '246',
       },
     ],
   },
@@ -133,19 +141,19 @@ const mvcData = [
       },
       {
         locationName: 'Bakers Basin',
-        locationNumber: '109',
+        locationNumber: '186',
       },
       {
         locationName: 'Bayonne',
-        locationNumber: '109',
+        locationNumber: '187',
       },
       {
         locationName: 'Camden',
-        locationNumber: '109',
+        locationNumber: '189',
       },
       {
         locationName: 'Cardiff',
-        locationNumber: '109',
+        locationNumber: '208',
       },
       {
         locationName: 'Delanco',
@@ -153,23 +161,27 @@ const mvcData = [
       },
       {
         locationName: 'Eatontown',
-        locationNumber: '109',
+        locationNumber: '102',
       },
-      {
-        locationName: 'Elizabeth',
-        locationNumber: '109',
-      },
-      {
-        locationName: 'Flemington',
-        locationNumber: '109',
-      },
-      {
-        locationName: 'Freehold',
-        locationNumber: '109',
-      },
+      // {
+      //   locationName: 'Elizabeth',
+      //   locationNumber: '109',
+      // },
+      // {
+      //   locationName: 'Flemington',
+      //   locationNumber: '109',
+      // },
+      // {
+      //   locationName: 'Freehold',
+      //   locationNumber: '109',
+      // },
       {
         locationName: 'Lodi',
-        locationNumber: '109',
+        locationNumber: '198',
+      },
+      {
+        locationName: 'Newark',
+        locationNumber: '200',
       },
     ],
   },

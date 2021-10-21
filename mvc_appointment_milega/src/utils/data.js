@@ -8,10 +8,11 @@ export const locationName = [
   { name: 'Cardiff', index: 7 },
   { name: 'Delanco', index: 8 },
   { name: 'Eatontown', index: 9 },
-  { name: 'Elizabeth', index: 10 },
-  { name: 'Flemington', index: 11 },
-  { name: 'Freehold', index: 12 },
+  // { name: 'Elizabeth', index: 10 },
+  // { name: 'Flemington', index: 11 },
+  // { name: 'Freehold', index: 12 },
   { name: 'Lodi', index: 13 },
+  { name: 'Newark', index: 14 },
 ];
 
 export const months = [
