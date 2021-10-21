@@ -2,9 +2,12 @@ import React from 'react';
 import './Location.css';
 import Loading from '../Loading/Loading';
 import Speech from 'react-speech';
+import useSound from 'use-sound';
+import NotificationTone from '../../asset/Message-tone.mp3';
 
 const Location = ({ locationData, handleIsSelected, serverResponse }) => {
   const locationMap = new Map();
+  const [play] = useSound(NotificationTone);
 
   const handleRouteChange = (mvcRedirect) => {
     console.log('Changing route to', mvcRedirect);
@@ -12,7 +15,7 @@ const Location = ({ locationData, handleIsSelected, serverResponse }) => {
   };
 
   if (serverResponse.length) {
-    serverResponse.map((item) => {
+    serverResponse.forEach((item) => {
       locationMap.set(item.location, item);
     });
   }
@@ -40,6 +43,7 @@ const Location = ({ locationData, handleIsSelected, serverResponse }) => {
           console.log(
             `location url ${locationMap.get(item.name).url} ${mvcRedirect}`
           );
+          play();
         }
 
         return (
@@ -48,14 +52,16 @@ const Location = ({ locationData, handleIsSelected, serverResponse }) => {
               <span>{item.name}</span>
               {currentItemIsFound && (
                 <h4>
-                  <Speech
+                  {/* <Speech
                     text={`Alert, ${item.name} has a appointment available`}
                     textAsButton={false}
                     stop={false}
                     displayText={true}
-                  />
+                  /> */}
+
                   <span onClick={() => handleRouteChange(mvcRedirect)}>
                     Click here
+                    <em>Hurry!!!</em>
                   </span>
                 </h4>
               )}
