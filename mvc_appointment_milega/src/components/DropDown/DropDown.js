@@ -9,10 +9,9 @@ const DropDown = ({ handleAppointmentType, handleAppointmentInterval }) => {
           name='apointmentType'
           id='appointmentType'
           onChange={(event) => handleAppointmentType(event.target.value)}
+          defaultValue='initialPermit'
         >
-          <option value='initialPermit' selected>
-            Initial Permit
-          </option>
+          <option value='initialPermit'>Initial Permit</option>
           <option value='knowledgeTest'>Knowledge Test</option>
           <option value='renewal'>Renewal: License or Non-Driver ID</option>
         </select>
@@ -22,11 +21,9 @@ const DropDown = ({ handleAppointmentType, handleAppointmentInterval }) => {
           name='appointmentInterval'
           id='appointmentInterval'
           onChange={(event) => handleAppointmentInterval(event.target.value)}
+          defaultValue={3}
         >
-          <option value={3} selected>
-            {' '}
-            3 Seconds
-          </option>
+          <option value={3}> 3 Seconds</option>
           <option value={10}> 10 Seconds</option>
           <option value={30}> 30 Seconds</option>
           <option value={60}> 1 minute</option>

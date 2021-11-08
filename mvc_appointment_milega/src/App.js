@@ -11,7 +11,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      appointmentType: null,
+      appointmentType: 'initialPermit',
       appointmentLocation: null,
       selectedLocation: [],
       isSearching: false,
