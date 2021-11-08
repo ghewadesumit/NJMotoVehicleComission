@@ -53,6 +53,7 @@ const callUrl = async (
 ) => {
   try {
     const response = await axios.get(mvcURL);
+    // console.log('Response from url is', response.data);
     const getDataResult = getData(
       response.data,
       mvcURL,
@@ -92,6 +93,11 @@ const getData = (
     console.log(
       `No appointment available in ${mvcLocation[locationNumberIndex]}`
     );
+    return {
+      location: mvcLocation[locationNumberIndex],
+      msg: 'Still searching',
+      isFound: false,
+    };
   } else {
     const dateStringOne = $('div[class=control-label]').text();
     const dateString = $('.control-label').text();

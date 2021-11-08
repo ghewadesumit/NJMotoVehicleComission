@@ -30,19 +30,19 @@ const Location = ({ locationData, handleIsSelected, serverResponse }) => {
         let mvcRedirect = null;
         let currentItemIsFound = false;
 
-        console.log(locationMap);
+        // console.log(locationMap);
         if (
           locationMap.size > 0 &&
           locationMap.has(item.name) &&
           locationMap.get(item.name).isFound
         ) {
-          console.log('Location component', locationMap.get(item.name));
+          // console.log('Location component', locationMap.get(item.name));
           foundClass = 'found';
           currentItemIsFound = true;
           mvcRedirect = locationMap.get(item.name).url;
-          console.log(
-            `location url ${locationMap.get(item.name).url} ${mvcRedirect}`
-          );
+          // console.log(
+          //   `location url ${locationMap.get(item.name).url} ${mvcRedirect}`
+          // );
           play();
         }
 
